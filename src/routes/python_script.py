@@ -46,21 +46,21 @@ def move_to_postgres(df):
     # Store the DataFrame in the PostgreSQL table
     df.to_sql(table_name, con=engine, if_exists="append", index=False)
 
-    try:
-        rdb = engine.raw_connection()
-        cursor = rdb.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-        # Execute the SQL query
-        query = f'''SELECT * FROM "{table_name}"'''
-        cursor.execute(query)
-        result = cursor.fetchall()
-        for row in result:
-            print(row)
-        return result
-    except Exception as e:
-        print("Error:", e)
-    finally:
-        # Close the database connection
-        rdb.close()
+    # try:
+    #     rdb = engine.raw_connection()
+    #     cursor = rdb.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    #     # Execute the SQL query
+    #     query = f'''SELECT * FROM "{table_name}"'''
+    #     cursor.execute(query)
+    #     # result = cursor.fetchall()
+    #     # for row in result:
+    #     #     print(row)
+    #     # return result
+    # except Exception as e:
+    #     print("Error:", e)
+    # finally:
+    #     # Close the database connection
+    #     rdb.close()
 
     # Close the database connection
     engine.dispose()
